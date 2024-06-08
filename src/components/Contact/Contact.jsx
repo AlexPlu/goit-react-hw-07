@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { FaUser, FaPhone, FaTrash } from "react-icons/fa";
-import { deleteContact } from "../../redux/contactsSlice";
+import { deleteContact } from "../../redux/contactsOps";
 import { Card, CardContent, Typography, IconButton, Box, CardActions } from "@mui/material";
 
 const Contact = ({ contact }) => {
