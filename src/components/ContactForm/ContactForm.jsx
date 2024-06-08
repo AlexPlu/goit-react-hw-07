@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { addContact } from "../../redux/contactsSlice";
+import { TextField, Button, Box } from "@mui/material";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -27,17 +28,39 @@ const ContactForm = () => {
 
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-      <Form>
-        <label htmlFor="name">Name:</label>
-        <Field type="text" id="name" name="name" />
-        <ErrorMessage name="name" component="div" />
-
-        <label htmlFor="number">Number:</label>
-        <Field type="text" id="number" name="number" />
-        <ErrorMessage name="number" component="div" />
-
-        <button type="submit">Add Contact</button>
-      </Form>
+      {({ handleSubmit, handleChange, values, errors, touched }) => (
+        <Form onSubmit={handleSubmit}>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              id="name"
+              name="name"
+              label="Name"
+              value={values.name}
+              onChange={handleChange}
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+            />
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              id="number"
+              name="number"
+              label="Number"
+              value={values.number}
+              onChange={handleChange}
+              error={touched.number && Boolean(errors.number)}
+              helperText={touched.number && errors.number}
+            />
+          </Box>
+          <Box display="flex" justifyContent="center" mt={2}>
+            <Button type="submit" variant="contained" color="primary">
+              Add Contact
+            </Button>
+          </Box>
+        </Form>
+      )}
     </Formik>
   );
 };

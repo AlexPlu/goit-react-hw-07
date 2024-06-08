@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { FaUser, FaPhone, FaTrash } from "react-icons/fa";
 import { deleteContact } from "../../redux/contactsSlice";
-import "./Contact.css";
+import { Card, CardContent, Typography, IconButton, Box, CardActions } from "@mui/material";
 
 const Contact = ({ contact }) => {
   const dispatch = useDispatch();
@@ -12,21 +12,25 @@ const Contact = ({ contact }) => {
   };
 
   return (
-    <div className="contact-wrapper">
-      <p>
-        <FaUser className="contact-icon" />
-        {name}
-      </p>
-
-      <p>
-        <FaPhone className="contact-icon" />
-        {number}
-      </p>
-      <button onClick={handleDelete}>
-        <FaTrash className="contact-icon" />
-        Delete
-      </button>
-    </div>
+    <Card>
+      <CardContent>
+        <Typography variant="h6" component="div">
+          <FaUser className="contact-icon" />
+          {name}
+        </Typography>
+        <Typography variant="body1" color="textSecondary">
+          <FaPhone className="contact-icon" />
+          {number}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Box display="flex" justifyContent="flex-end" width="100%">
+          <IconButton onClick={handleDelete} aria-label="delete">
+            <FaTrash />
+          </IconButton>
+        </Box>
+      </CardActions>
+    </Card>
   );
 };
 
