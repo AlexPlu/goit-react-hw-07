@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { nanoid } from "nanoid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { addContact } from "../../redux/contactsSlice";
@@ -22,16 +21,12 @@ const ContactForm = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(addContact({ id: nanoid(), ...values }));
+    dispatch(addContact(values));
     resetForm();
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
       <Form>
         <label htmlFor="name">Name:</label>
         <Field type="text" id="name" name="name" />
